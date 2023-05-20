@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Rules\UserPassword;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserPostRequest extends FormRequest
+class UserPasswordRequest extends FormRequest
 {
 
 
@@ -17,8 +17,9 @@ class UserPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:100',
-            'email' => 'required|email',
+            'oldPassword' => [new UserPassword],
+            'firsPassword' => 'required|different:oldPassword|min:8',
+            'secondPassword' => 'required|same:firsPassword|different:oldPassword|min:8',
         ];
     }
 }

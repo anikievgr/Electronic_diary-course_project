@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserPasswordRequest;
 use App\Http\Requests\UserPostRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class MainProfileController extends Controller
 {
@@ -74,7 +76,18 @@ class MainProfileController extends Controller
         $user->update($request->all());
         return redirect()->back();
     }
-
+    /**
+     * Password update.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePassword(UserPasswordRequest $request, $id){
+        $user = User::find($id);
+        $user->password = Hash::make($request->secondPassword);
+        $user->save();
+        return redirect()->back();
+    }
     /**
      * Remove the specified resource from storage.
      *
