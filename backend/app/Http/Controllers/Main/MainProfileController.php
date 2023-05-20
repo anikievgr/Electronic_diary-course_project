@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserPostRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MainProfileController extends Controller
@@ -14,10 +16,8 @@ class MainProfileController extends Controller
      */
     public function index()
     {
-
         return view('main/profile/index');
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -68,9 +68,11 @@ class MainProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserPostRequest $request, $id, User $user)
     {
-        //
+        $user = User::find($id);
+        $user->update($request->all());
+        return redirect()->back();
     }
 
     /**

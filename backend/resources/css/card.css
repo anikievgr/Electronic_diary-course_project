@@ -1,0 +1,42 @@
+.mainCard  {
+    width: 50%;
+    height: 100%;
+    background-color: rgb(31,41,55);
+    color: rgb(156,163,175);
+    padding: 10px;
+
+}
+.mainCard .inputs{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+.mainCard .inputs .mainInput{
+    margin-top: 5px;
+    margin-bottom: 15px;
+    outline-width: 0;
+    border: 0;
+    border-radius: 10px;
+    height: 40px;
+    background-color: rgb(17,24,39);
+    color: rgb(156,163,175);
+    padding-left: 10px ;
+}
+.mainCard .inputs .error{
+    color: rgba(255, 0, 0, 0.73);
+}
+.mainCard button{
+    width: 100px;
+    height: 34px;
+    border-radius: 10px;
+    background-color: #e5e7eb;
+    border: none;
+    color: #1f2937;
+    font-weight: bold;
+}
+.mainCard button:hover{
+    background-color: white;
+}
+.mainCard button:active{
+    background-color: rgba(229, 231, 235, 0.74);
+}

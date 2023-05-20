@@ -126,6 +126,7 @@
       <path value="$PROJECT_DIR$/backend/vendor/pestphp/pest" />
       <path value="$PROJECT_DIR$/backend/vendor/pestphp/pest-plugin-laravel" />
       <path value="$PROJECT_DIR$/backend/vendor/pestphp/pest-plugin" />
+      <path value="$PROJECT_DIR$/backend/vendor/laravel/telescope" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />

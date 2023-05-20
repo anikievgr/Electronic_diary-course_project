@@ -13,16 +13,13 @@
                 @endif
             </ul>
 
-            <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                {{\auth()->user()->name }}
-            </div>
             <div class="dropdown text-end">
                 <div class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{\auth()->user()->logo}}" alt="mdo" width="32" height="32" class="rounded-circle">
+                    {{\auth()->user()->name }}
                 </div>
                 <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
                     <li><a class="dropdown-item" href="#">Создать новый тест</a></li>
-                    <li><a class="dropdown-item" href="{{route('index')}}">Профиль</a></li>
+                    <li><a class="dropdown-item" href="{{route('mainProfile.index')}}">Профиль</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
                         <form method="POST" action="{{ route('logout') }}">
