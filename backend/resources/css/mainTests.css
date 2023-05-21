@@ -76,3 +76,6 @@ label{
 .test button{
     margin-top: 10px;
 }
+.mainCardHeader  .error{
+    color: rgba(255, 0, 0, 0.73);
+}

@@ -29,6 +29,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/mainProfile/updatePassword/{id}', [MainProfileController::class, 'updatePassword'])->name('mainProfile.updatePassword');
     Route::resource('/crudTestPage', TestController::class);
     Route::resource('/question', QuestionController::class);
+
+
+
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

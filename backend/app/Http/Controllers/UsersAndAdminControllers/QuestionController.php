@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\UsersAndAdminControllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TestBasicDataRequest;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -33,9 +34,9 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TestBasicDataRequest $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
