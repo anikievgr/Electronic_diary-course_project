@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class CorrectAnswers extends Model
 {
     use HasFactory;
-    protected $fillable=['questions_id','correct_answer'];
+    protected $fillable=['questions_id','answer_id'];
 }

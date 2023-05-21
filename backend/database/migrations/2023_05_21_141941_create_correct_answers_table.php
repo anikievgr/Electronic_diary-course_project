@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('correct_answers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('correct_answer');
+            $table->integer('answer_id');
             $table->integer('questions_id');
         });
     }

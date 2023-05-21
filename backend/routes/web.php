@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/mainProfile', MainProfileController::class);
     Route::post('/mainProfile/updatePassword/{id}', [MainProfileController::class, 'updatePassword'])->name('mainProfile.updatePassword');
     Route::resource('/crudTestPage', TestController::class);
+    Route::post('/crudTestPage/createQuestion/{id}', [TestController::class, 'createQuestion'])->name('crudTestPage.createQuestion');
     Route::resource('/question', QuestionController::class);
 
 

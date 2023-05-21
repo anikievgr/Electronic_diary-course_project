@@ -1,6 +1,7 @@
 @extends('../main/app')
 @section('style')
     @vite(['resources/css/mainTests.css'])
+    @vite(['resources/css/card.css'])
 @endsection
 @section('content')
     <div class="row">
@@ -15,5 +16,21 @@
                 </a>
             </div>
         </div>
+        <div class="col-md-8 mx-auto d-flex justify-content-between mt-2 flex-wrap">
+    @foreach($tests as $user)
+        @foreach($user->tests as $test)
+                    <div class="mainCard card">
+                        <p>Тест</p>
+                        <div class="inputs">
+                            <label>Название:</label>
+                            <input class="mainInput" type="text"  disabled="disabled" value="{{$test->name}}">
+                            <label >Время на решение</label>
+                            <input class="mainInput" type="text"  disabled="disabled" @if($test->time) value="{{$test->time}}" @else  value="нет" @endif>
+                            <a href="#" >Изменить</a>
+                        </div>
+                    </div>
+            @endforeach
+    @endforeach
+                </div>
     </div>
 @endsection
