@@ -1,4 +1,7 @@
 @extends('../main/app')
+@section('style')
+    @vite(['resources/css/card.css'])
+@endsection
 @section('content')
     <div class="row">
         <div class="col-md-8 mx-auto d-flex justify-content-around">
@@ -32,6 +35,6 @@
                     </div>
                 </form>
             </div>
-        </div
+        </div>
     </div>
 @endsection

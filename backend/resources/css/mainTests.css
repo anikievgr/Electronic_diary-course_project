@@ -1,0 +1,78 @@
+.mainCardHeader{
+    width: 100%;
+    background-color: rgb(31,41,55);
+    color: rgb(156,163,175);
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.mainCardHeader a{
+    width: 160px;
+    height: 34px;
+    border-radius: 10px;
+    background-color: #e5e7eb;
+    border: none;
+    color: #1f2937 !important;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.mainCardHeader a:hover{
+    background-color: white;
+}
+.mainCardHeader a:active{
+    background-color: rgba(229, 231, 235, 0.74);
+}
+.mainCardHeader a svg{
+    margin-right: 5px;
+    color: #1f2937 !important;
+}
+.mainCardHeader .basicDataTest label{
+    padding: 10px;
+}
+.mainInput{
+    padding: 10px;
+    outline-width: 0;
+    border: 0;
+    border-radius: 10px;
+    height: 40px;
+    background-color: rgb(17,24,39);
+    color: rgb(156,163,175);
+}
+.mainCardHeader button{
+    width: 100px;
+    height: 34px;
+    border-radius: 10px;
+    background-color: #e5e7eb;
+    border: none;
+    color: #1f2937;
+    font-weight: bold;
+}
+.mainCardHeader button:hover{
+    background-color: white;
+}
+.mainCardHeader button:active{
+    background-color: rgba(229, 231, 235, 0.74);
+}
+.addQuestion{
+    width: 180px !important;
+}
+.answers{
+    display: flex;
+    flex-direction: column;
+}
+label{
+    margin-bottom: 10px;
+}
+
+.answers label{
+    display: flex;
+}
+.test button{
+    margin-top: 10px;
+}
