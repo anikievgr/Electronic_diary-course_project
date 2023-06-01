@@ -3,84 +3,47 @@
 namespace App\Http\Controllers\UsersAndAdminControllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\TestBasicDataRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\QuestionRequest;
+use App\Models\Answer;
+use App\Models\Questions;
+use App\Models\Test;
 
 class QuestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function createAnswer(QuestionRequest $request, $id)
     {
-        //
+        $questions = Questions::create([
+            'questions'=> $request->questions,
+            'test_id'=> $id,
+        ]);
+        Answer::create([
+            'questions_id' => $questions->id,
+            'answer' => $request->firstAnswer,
+            'correct_answer' => ($request->firstAnswerCheckbox ? true : false),
+        ]);
+        Answer::create([
+            'questions_id' => $questions->id,
+            'answer' => $request->secondAnswer,
+            'correct_answer' => ($request->secondAnswerCheckbox ? true : false),
+        ]);
+        Answer::create([
+            'questions_id' => $questions->id,
+            'answer' => $request->thirdAnswer,
+            'correct_answer' => ($request->thirdAnswerCheckbox ? true : false),
+        ]);
+        Answer::create([
+            'questions_id' => $questions->id,
+            'answer' => $request->fourthAnswer,
+            'correct_answer' => ($request->fourthAnswerCheckbox ? true : false),
+        ]);
+        $test = Test::where('id', $id)->with(['questions.answers'])->get();
+        return redirect()->route('crudTestPage.show', $test[0]->id);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(TestBasicDataRequest $request)
-    {
-        dd($request->all());
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function deleteAnswer($id){
+        $q = Questions::find($id);
+        $q->answers()->delete();
+        $q->delete();
+        return redirect()->back();
     }
 }

@@ -79,3 +79,8 @@ label{
 .mainCardHeader  .error{
     color: rgba(255, 0, 0, 0.73);
 }
+.trash{
+    position: relative;
+    left: 96%;
+    width: 30px !important;
+}

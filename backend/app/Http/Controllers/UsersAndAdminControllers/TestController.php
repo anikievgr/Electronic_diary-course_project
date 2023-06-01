@@ -99,35 +99,7 @@ class TestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function createQuestion(QuestionRequest $request, $id)
-    {
-        $questions = Questions::create([
-            'questions'=> $request->questions,
-            'test_id'=> $id,
-        ]);
-        Answer::create([
-            'questions_id' => $questions->id,
-            'answer' => $request->firstAnswer,
-            'correct_answer' => ($request->firstAnswerCheckbox ? true : false),
-        ]);
-        Answer::create([
-            'questions_id' => $questions->id,
-            'answer' => $request->secondAnswer,
-            'correct_answer' => ($request->secondAnswerCheckbox ? true : false),
-        ]);
-        Answer::create([
-            'questions_id' => $questions->id,
-            'answer' => $request->thirdAnswer,
-            'correct_answer' => ($request->thirdAnswerCheckbox ? true : false),
-        ]);
-        Answer::create([
-            'questions_id' => $questions->id,
-            'answer' => $request->fourthAnswer,
-            'correct_answer' => ($request->fourthAnswerCheckbox ? true : false),
-        ]);
-        $test = Test::where('id', $id)->with(['questions.answers'])->get();
-        return redirect()->route('crudTestPage.show', $test[0]->id);
-    }
+
     /**
      * Remove the specified resource from storage.
      *

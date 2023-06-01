@@ -26,7 +26,7 @@
                             <input class="mainInput" type="text"  disabled="disabled" value="{{$test->name}}">
                             <label >Время на решение</label>
                             <input class="mainInput" type="text"  disabled="disabled" @if($test->time) value="{{$test->time}}" @else  value="нет" @endif>
-                            <a href="#" >Изменить</a>
+                            <a href="{{route('crudTestPage.show', $test->id)}}" >Изменить</a>
                         </div>
                     </div>
             @endforeach
