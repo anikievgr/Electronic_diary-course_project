@@ -76,7 +76,7 @@
                                         <br>
                                         @foreach($question->answers as $key => $answer)
                                             <label>
-                                                    <input type="checkbox" name="checkedCheckbox" disabled="disabled" @if(count($answer->correctAnswer) > 0) checked @endif>
+                                                    <input type="checkbox" name="checkedCheckbox" disabled="disabled" @if($answer->correct_answer) checked @endif>
                                                     <input class="mainInput mx-3  w-100" type="text"  placeholder="Ответ" value="{{$answer->answer}}" disabled="disabled">
                                                 </label>
                                         @endforeach

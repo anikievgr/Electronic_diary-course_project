@@ -66,7 +66,7 @@ class TestController extends Controller
      */
     public function show($id)
     {
-        $test = Test::where('id', $id)->with(['questions.answers.correctAnswer'])->get();
+        $test = Test::where('id', $id)->with(['questions.answers'])->get();
         return view('main/tests/update', compact('test'));
     }
 
@@ -101,57 +101,31 @@ class TestController extends Controller
      */
     public function createQuestion(QuestionRequest $request, $id)
     {
-
         $questions = Questions::create([
             'questions'=> $request->questions,
             'test_id'=> $id,
         ]);
-        $answer [0] = Answer::create([
+        Answer::create([
             'questions_id' => $questions->id,
             'answer' => $request->firstAnswer,
+            'correct_answer' => ($request->firstAnswerCheckbox ? true : false),
         ]);
-        $answer [1] = Answer::create([
+        Answer::create([
             'questions_id' => $questions->id,
             'answer' => $request->secondAnswer,
+            'correct_answer' => ($request->secondAnswerCheckbox ? true : false),
         ]);
-        $answer [2] = Answer::create([
+        Answer::create([
             'questions_id' => $questions->id,
             'answer' => $request->thirdAnswer,
+            'correct_answer' => ($request->thirdAnswerCheckbox ? true : false),
         ]);
-        $answer [3] = Answer::create([
+        Answer::create([
             'questions_id' => $questions->id,
             'answer' => $request->fourthAnswer,
+            'correct_answer' => ($request->fourthAnswerCheckbox ? true : false),
         ]);
-        $answers = array_keys($request->all(), 'on');
-        foreach ($answers as $item){
-            switch ($item) {
-                case 'firstAnswerCheckbox':
-                    CorrectAnswers::create([
-                        'questions_id' => $questions->id,
-                        'answer_id' => $answer[0]->id,
-                    ]);
-                    break;
-                case 'secondAnswerCheckbox':
-                    CorrectAnswers::create([
-                        'questions_id' => $questions->id,
-                        'answer_id' => $answer[1]->id,
-                    ]);
-                    break;
-                case 'thirdAnswerCheckbox':
-                    CorrectAnswers::create([
-                        'questions_id' => $questions->id,
-                        'answer_id' => $answer[2]->id,
-                    ]);
-                    break;
-                case 'fourthAnswerCheckbox':
-                    CorrectAnswers::create([
-                        'questions_id' => $questions->id,
-                        'answer_id' => $answer[3]->id,
-                    ]);
-                    break;
-            }
-        }
-        $test = Test::where('id', $id)->with(['questions.answers.correctAnswer'])->get();
+        $test = Test::where('id', $id)->with(['questions.answers'])->get();
         return redirect()->route('crudTestPage.show', $test[0]->id);
     }
     /**
