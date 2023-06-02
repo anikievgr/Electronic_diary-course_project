@@ -10,7 +10,7 @@ class UserPassword implements Rule
     /**
      * Create a new rule instance.
      *
-     * @return void
+     * @return voidTest Data
      */
     public function __construct()
     {

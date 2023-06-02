@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Main\MainProfileController;
+use App\Http\Controllers\UsersAndAdminControllers\TestController;
+use App\Http\Controllers\UsersAndAdminControllers\QuestionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +27,17 @@ Route::get('/', function (){
 Route::middleware('auth')->group(function () {
     Route::resource('/mainProfile', MainProfileController::class);
     Route::post('/mainProfile/updatePassword/{id}', [MainProfileController::class, 'updatePassword'])->name('mainProfile.updatePassword');
+    Route::resource('/crudTestPage', TestController::class);
+    Route::get('/crudTestPage/delete/{id}', [TestController::class, 'delete'])->name('crudTestPage.delete');
+    Route::prefix('/question')->group(function (){
+        Route::post('/createQuestion/{id}', [QuestionController::class, 'createAnswer'])->name('question.createQuestion');
+        Route::get('/deleteAnswer/{id}', [QuestionController::class, 'deleteAnswer'])->name('question.deleteAnswer');
+    });
+
+
+
+
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
