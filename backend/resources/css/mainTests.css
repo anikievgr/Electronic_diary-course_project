@@ -35,6 +35,15 @@
 .mainCardHeader .basicDataTest label{
     padding: 10px;
 }
+.mainCardHeader .basicDataTest{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.mainCardHeader .basicDataTest a{
+    padding-left: 20px !important;
+}
 .mainInput{
     padding: 10px;
     outline-width: 0;

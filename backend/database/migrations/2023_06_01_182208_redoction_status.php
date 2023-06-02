@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('questions', function (Blueprint $table) {
+        Schema::table('tests', function (Blueprint $table) {
             $table->boolean('redoction_status')->default(false);
         });
     }
@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('questions', function (Blueprint $table) {
+        Schema::table('tests', function (Blueprint $table) {
             $table->dropColumn('redoction_status');
         });
     }

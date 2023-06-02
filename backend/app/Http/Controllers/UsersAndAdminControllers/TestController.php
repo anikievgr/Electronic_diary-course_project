@@ -33,7 +33,7 @@ class TestController extends Controller
     public function create()
     {
         $user = User::with(['tests.questions'])
-            ->with(['tests.questions.correctAnswers', 'tests.questions.answers'])
+            ->with(['tests.questions.answers'])
             ->get();
         return view('main/tests/create', compact('user'));
     }
@@ -78,7 +78,11 @@ class TestController extends Controller
      */
     public function edit($id)
     {
+        Test::whereId($id)->update([
+            'redoction_status'  =>  true
+        ]);
 
+        return redirect()->route('crudTestPage.index');
     }
 
     /**
@@ -108,6 +112,16 @@ class TestController extends Controller
      */
     public function destroy($id)
     {
-        //
+    }
+    public function delete($id){
+
+        $test = Test::find($id);
+        foreach ($test->questions as $question) {
+            $question->answers()->delete();
+        }
+
+        $test->questions()->delete();
+        $test->delete();
+        return redirect()->route('crudTestPage.index');
     }
 }
