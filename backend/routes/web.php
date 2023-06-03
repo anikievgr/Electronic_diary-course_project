@@ -37,12 +37,13 @@ Route::middleware('auth')->group(function () {
     });
     Route::prefix('/searchTests')->group(function (){
         Route::get('/index', [SearchTestsController::class, 'index'])->name('searchTests.index');
-        Route::get('/redirect/{id}', [SearchTestsController::class, 'redirect']);
+        Route::post('/redirect/{id}', [SearchTestsController::class, 'redirect']);
 
 
     });
     Route::prefix('/startTest')->group(function (){
         Route::get('/test/{id}', [StartTestController::class, 'test'])->name('startTest.test');
+        Route::get('/checkAnswer/{id}', [StartTestController::class, 'checkAnswer'])->name('startTest.checkAnswer');
     });
 
 

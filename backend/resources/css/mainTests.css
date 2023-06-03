@@ -35,6 +35,10 @@
 .mainCardHeader .basicDataTest label{
     padding: 10px;
 }
+.basicDataTest p {
+   text-align: center;
+
+}
 .mainCardHeader .basicDataTest{
     width: 100%;
     display: flex;
