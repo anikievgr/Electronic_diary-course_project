@@ -20,7 +20,7 @@ class SearchTestsController extends Controller
                 {
                     $q->select('id', 'name', 'email');
                 }])
-                ->get();
+                ->skip($request->list)->take(10)->get();
         }else{
             $tests = Test::query()
                 ->where(function ($query) use ($nameOrUsername) {
@@ -30,7 +30,7 @@ class SearchTestsController extends Controller
                         });
                 })
                 ->with('user:id,name,email')
-                ->get();
+                ->skip($request->list)->take(10)->get();
         }
         return response()->json($tests);
     }

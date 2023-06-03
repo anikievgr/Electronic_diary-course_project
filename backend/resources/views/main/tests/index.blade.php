@@ -16,9 +16,9 @@
                 </a>
             </div>
         </div>
-        <div class="col-md-8 mx-auto d-flex justify-content-between mt-2 flex-wrap">
-    @foreach($tests as $user)
-        @foreach($user->tests as $test)
+        <div class="col-md-8 mx-auto  mt-2 mainCardCotener">
+            @foreach($tests as $user)
+                @foreach($user->tests as $test)
                     <div class="mainCard card">
                         <p>Тест</p>
                         <div class="inputs">
@@ -32,8 +32,8 @@
                             <a href="{{route('crudTestPage.delete', $test->id)}}" >Удалить</a>
                         </div>
                     </div>
+                    @endforeach
             @endforeach
-    @endforeach
-                </div>
+        </div>
     </div>
 @endsection
