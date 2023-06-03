@@ -3,99 +3,46 @@
     @vite(['resources/css/mainTests.css'])
 @endsection
 @section('content')
-    <div class="row">
+    <form id="form" action="{{route('startTest.checkAnswer', $test[0]->id)}}" class="row">
         @csrf
         <div class="col-md-8 mx-auto ">
             <div class="mainCardHeader card">
                 <div class="basicDataTest">
                     <p>{{$test[0]->name}}</p>
-                    @if($test[0]->redoction_status || empty($test[0]->questions[0]) )
-                        <a href="{{route('crudTestPage.index')}}">Назад</a>
-                    @else
-                        <a href="{{route('crudTestPage.edit', $test[0]->id)}}">Завершить</a>
-                    @endif
+                    <p >Время: <span id="time">{{$test[0]->time}}</span></p>
                 </div>
             </div>
 
         </div>
-        @if(!$test[0]->redoction_status)
-            <form  method="post" action="{{route('question.createQuestion',$test[0]->id)}}" class="col-md-8 mx-auto mt-5">
-            @csrf
-            <div class="mainCardHeader card">
-                <div class="test w-100">
-                    <div>
-                        <label>Вопрос:</label>
-                        <br>
-                        <input class="mainInput w-100" type="text" name="questions" placeholder="Вопрос" value="{{old('questions')}}">
-                        @error('questions') <p class="error">Обязателен к заполнению</p> @enderror
-                    </div>
-                    <br>
-                    <div class="answers">
-                        <label>Ответы:</label>
-                        <br>
-                        <label>
-                            <input type="checkbox" name="firstAnswerCheckbox" >
-                            <input class="mainInput mx-3  w-100" type="text" name="firstAnswer" placeholder="Ответ" value="{{old('firstAnswer')}}">
-                        </label>
-                        @error('firstAnswer') <p class="error">Обязателен к заполнению</p>  @enderror
-                        <label>
-                            <input type="checkbox" name="secondAnswerCheckbox" >
-                            <input class="mainInput mx-3  w-100" type="text" name="secondAnswer" placeholder="Ответ" value="{{old('secondAnswer')}}">
-                        </label>
-                        @error('secondAnswer') <p class="error">Обязателен к заполнению</p>  @enderror
-                        <label>
-                            <input type="checkbox" name="thirdAnswerCheckbox" >
-                            <input class="mainInput mx-3  w-100" type="text" name="thirdAnswer" placeholder="Ответ" value="{{old('thirdAnswer')}}">
-                        </label>
-                        @error('thirdAnswer') <p class="error">Обязателен к заполнению</p>  @enderror
-                        <label>
-                            <input type="checkbox" name="fourthAnswerCheckbox" >
-                            <input class="mainInput mx-3  w-100" type="text" name="fourthAnswer" placeholder="Ответ" value="{{old('fourthAnswer')}}">
-                        </label>
-                        @error('fourthAnswer') <p class="error">Обязателен к заполнению</p>  @enderror
-                        @if($errors->get('firstAnswerCheckbox') && $errors->get('secondAnswerCheckbox') && $errors->get('thirdAnswerCheckbox') && $errors->get('fourthAnswerCheckbox'))
-                            <p class="error">Выберите ответ</p>
-                        @endif
-                    </div>
-                    <p>Правиьльный ответ отметье галочкой</p>
-                    <button type="submit" class="addQuestion">
-                        Добавить вопрос
-                    </button>
-                </div>
-            </div>
-        </form>
-        @endif
         @foreach($test as $questions)
             @if(!empty($questions->questions) )
                 @foreach($questions->questions as $question)
-
                         <div class="col-md-8 mx-auto mt-5">
                             <div class="mainCardHeader card">
                                 <div class="test w-100">
                                     <div>
-                                        <label>Вопрос:</label>
-                                        <br>
-                                        <input class="mainInput w-100" type="text" name="questions" placeholder="Вопрос" value="{{$question->questions}}" disabled="disabled">
-                                        @error('questions') <p class="error">Обязателен к заполнению</p> @enderror
+                                        <input class="mainInput w-100" type="text" name="questions" placeholder="Вопрос" value="{{$question->questions}}"  disabled="disabled">
                                     </div>
                                     <br>
                                     <div class="answers">
                                         <label>Ответы:</label>
                                         <br>
-                                        @foreach($question->answers as $key => $answer)
-                                            <label>
-                                                    <input type="checkbox" name="checkedCheckbox" disabled="disabled" @if($answer->correct_answer) checked @endif>
-                                                    <input class="mainInput mx-3  w-100" type="text"  placeholder="Ответ" value="{{$answer->answer}}" @if($answer->correct_answer) style="color:#02c80f " @endif disabled="disabled">
-                                                </label>
-                                        @endforeach
-                                        @if(!$test[0]->redoction_status)
-                                            <a href="{{route('question.deleteAnswer', $question->id)}}" class="trash">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
-                                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
-                                                </svg>
-                                            </a>
-                                        @endif
+                                        <label>
+                                                <input type="checkbox" name="q{{$question->id}}a{{$question->answers[0]->id}}">
+                                                <input class="mainInput mx-3  w-100" type="text"  value="{{$question->answers[0]->answer}}" placeholder="Ответ"  disabled="disabled">
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="q{{$question->id}}a{{$question->answers[1]->id}}">
+                                            <input class="mainInput mx-3  w-100" type="text"  value="{{$question->answers[1]->answer}}" placeholder="Ответ"  disabled="disabled">
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="q{{$question->id}}a{{$question->answers[2]->id}}">
+                                            <input class="mainInput mx-3  w-100" type="text" value="{{$question->answers[2]->answer}}" placeholder="Ответ"  disabled="disabled">
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="q{{$question->id}}a{{$question->answers[3]->id}}">
+                                            <input class="mainInput mx-3  w-100" type="text"  value="{{$question->answers[3]->answer}}" placeholder="Ответ"  disabled="disabled">
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -104,5 +51,51 @@
             @endif
 
         @endforeach
-    </div>
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Modal body text goes here.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-primary mt-5 " data-bs-toggle="modal" data-bs-target="#myModal" style="width: 66%; margin: 0 auto; margin-bottom: 30px">Завершить</button>
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Завершение</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        Вы точно хотите завершить тест?
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-primary" data-bs-dismiss="modal">Да</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        </br>
+    </form>
+@endsection
+@section('js')
+    @vite(['resources/js/test.js'])
 @endsection
