@@ -124,4 +124,5 @@ class TestController extends Controller
         $test->delete();
         return redirect()->route('crudTestPage.index');
     }
+
 }
