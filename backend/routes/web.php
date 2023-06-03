@@ -6,6 +6,7 @@ use App\Http\Controllers\Main\MainProfileController;
 use App\Http\Controllers\UsersAndAdminControllers\TestController;
 use App\Http\Controllers\UsersAndAdminControllers\QuestionController;
 use App\Http\Controllers\UsersAndAdminControllers\SearchTestsController;
+use App\Http\Controllers\UsersAndAdminControllers\StartTestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,6 +37,12 @@ Route::middleware('auth')->group(function () {
     });
     Route::prefix('/searchTests')->group(function (){
         Route::get('/index', [SearchTestsController::class, 'index'])->name('searchTests.index');
+        Route::get('/redirect/{id}', [SearchTestsController::class, 'redirect']);
+
+
+    });
+    Route::prefix('/startTest')->group(function (){
+        Route::get('/test/{id}', [StartTestController::class, 'test'])->name('startTest.test');
     });
 
 

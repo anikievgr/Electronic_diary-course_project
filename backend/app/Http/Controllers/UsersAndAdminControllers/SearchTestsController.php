@@ -34,4 +34,7 @@ class SearchTestsController extends Controller
         }
         return response()->json($tests);
     }
+    public function redirect($id){
+        return redirect()->route('startTest.test', $id);
+    }
 }
